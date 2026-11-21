@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selda Diez 24 Hours Minimart - POS System</title>
+  <title>Banguis-Diez Farm and Garden | Selda Diez 24 Hours Minimart POS</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,33 +15,44 @@
       color: #F0F9FF;
     }
 
-    /* Neon Icy Blue Glows & Modern Dark Glass Surfaces */
-    .ice-glow-frame {
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.35), inset 0 0 10px rgba(0, 229, 255, 0.15);
+    /* Dual Neon Icy Blue (#00E5FF) & Neon Emerald Green (#00FF88) Theme */
+    .neon-ice-frame {
+      box-shadow: 0 0 22px rgba(0, 229, 255, 0.32), inset 0 0 12px rgba(0, 255, 136, 0.14);
       border: 1.5px solid #00E5FF;
     }
 
-    .ice-panel {
-      background-color: #090C12;
-      border: 1px solid rgba(0, 229, 255, 0.22);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+    .neon-panel {
+      background-color: #0A0E14;
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
     }
 
-    .ice-gradient-text {
-      background: linear-gradient(135deg, #FFFFFF 0%, #BAE6FD 45%, #00E5FF 100%);
+    .dual-neon-text {
+      background: linear-gradient(90deg, #00E5FF 0%, #FFFFFF 50%, #00FF88 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .ice-btn {
+    .btn-neon-green {
+      background: linear-gradient(135deg, #00FF88 0%, #059669 100%);
+      border: 1px solid #6EE7B7;
+      color: #030712;
+      box-shadow: 0 0 18px rgba(0, 255, 136, 0.35);
+    }
+    .btn-neon-green:hover {
+      background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+      box-shadow: 0 0 26px rgba(0, 255, 136, 0.55);
+    }
+
+    .btn-neon-ice {
       background: linear-gradient(135deg, #00E5FF 0%, #0284C7 100%);
       border: 1px solid #7DD3FC;
       color: #030712;
-      box-shadow: 0 0 16px rgba(0, 229, 255, 0.35);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.32);
     }
-    .ice-btn:hover {
+    .btn-neon-ice:hover {
       background: linear-gradient(135deg, #67E8F9 0%, #0EA5E9 100%);
-      box-shadow: 0 0 24px rgba(0, 229, 255, 0.55);
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.5);
     }
 
     /* Custom Dark Scrollbar */
@@ -53,14 +64,11 @@
       background: #05070A;
     }
     ::-webkit-scrollbar-thumb {
-      background: #0284C7;
+      background: linear-gradient(180deg, #00E5FF, #00FF88);
       border-radius: 9999px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #00E5FF;
-    }
 
-    /* Thermal Receipt Print Styling (58mm / 80mm compatible - stays crisp B&W for ink/thermal paper) */
+    /* Thermal Receipt Print Styling (58mm / 80mm compatible) */
     @media print {
       body * {
         visibility: hidden !important;
@@ -89,44 +97,42 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-[#00E5FF] selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-[#00FF88] selection:text-black">
 
   <!-- Toast Notification Banner -->
   <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- TOP HEADER WITH LOGO (LEFT), BANGUIS-DIEZ CENTERPIECE (MIDDLE) & CONTROLS (RIGHT) -->
-  <header class="bg-gradient-to-r from-[#05070A] via-[#0B111A] to-[#05070A] border-b border-[#00E5FF]/50 shadow-[0_4px_25px_rgba(0,229,255,0.12)] px-3 py-2.5 sm:px-6">
-    <div class="max-w-[1650px] mx-auto flex flex-col xl:flex-row items-center justify-between gap-3">
+  <!-- TOP HEADER: LOGO (LEFT) | BANGUIS-DIEZ FARM AND GARDEN (CENTER) | CLOCK & CONTROLS (RIGHT) -->
+  <header class="bg-gradient-to-r from-[#05070A] via-[#0B121B] to-[#05070A] border-b border-[#00E5FF]/45 shadow-[0_4px_28px_rgba(0,229,255,0.12)] px-3 py-2.5 sm:px-6">
+    <div class="max-w-[1680px] mx-auto flex flex-col xl:flex-row items-center justify-between gap-3">
       
       <!-- LEFT: Brand Banner Logo Area -->
       <div class="flex items-center justify-center xl:justify-start shrink-0">
-        <div class="relative group rounded-xl overflow-hidden ice-glow-frame bg-[#090C12] flex items-center">
-          <!-- Primary Logo Image: Checks logo.jpeg first, falls back to logo.jpg, then styled fallback -->
+        <div class="relative group rounded-xl overflow-hidden neon-ice-frame bg-[#0A0E14] flex items-center">
           <img 
             id="header-banner-img" 
             src="logo.jpeg" 
             alt="Selda Diez 24 Hours Minimart - Banguis-Diez Farm & Garden" 
-            class="h-14 sm:h-16 md:h-[72px] w-auto object-contain block"
+            class="h-14 sm:h-16 md:h-[70px] w-auto object-contain block"
             onerror="handleLogoError(this)"
           />
-          <!-- Styled Fallback Banner if neither logo.jpeg nor logo.jpg is found -->
-          <div id="header-banner-fallback" class="hidden px-4 py-2 bg-[#0D121B] flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-[#05070A] border-2 border-[#00E5FF] flex flex-col items-center justify-center text-center shadow-[0_0_12px_rgba(0,229,255,0.4)]">
-              <span class="text-[11px] font-black text-[#00E5FF] leading-none">24</span>
-              <span class="text-[8px] font-extrabold text-[#F0F9FF] leading-none">HRS</span>
+          <!-- Clean SVG + Neon Fallback Banner if logo.jpeg / logo.jpg is missing -->
+          <div id="header-banner-fallback" class="hidden px-3.5 py-2 bg-[#0F151E] flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-[#05070A] border-2 border-[#00FF88] flex flex-col items-center justify-center text-center shadow-[0_0_12px_rgba(0,255,136,0.45)]">
+              <span class="text-[11px] font-black text-[#00FF88] leading-none">24</span>
+              <span class="text-[8px] font-extrabold text-[#00E5FF] leading-none">HRS</span>
             </div>
             <div>
               <div class="flex items-baseline gap-1.5">
-                <span class="text-white font-extrabold italic text-lg sm:text-xl tracking-tight">Selda</span>
-                <span class="ice-gradient-text font-black text-xl sm:text-2xl tracking-wider">DIEZ</span>
-                <span class="bg-[#00E5FF]/15 text-[#00E5FF] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#00E5FF]/50">MINIMART</span>
+                <span class="text-white font-extrabold italic text-lg tracking-tight">Selda</span>
+                <span class="dual-neon-text font-black text-xl tracking-wider">DIEZ</span>
+                <span class="bg-[#00FF88]/15 text-[#00FF88] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#00FF88]/50">MINIMART</span>
               </div>
-              <p class="text-[10px] text-[#94A3B8] font-semibold">24 Hours • Groceries • AgriVet &amp; More</p>
+              <p class="text-[10px] text-[#94A3B8] font-semibold">Groceries &bull; Drinks &bull; AgriVet</p>
             </div>
           </div>
 
-          <!-- Quick Upload Button to set Banner Image directly in Browser -->
-          <label for="logo-upload-input" title="Upload your Selda Diez banner image" class="cursor-pointer absolute bottom-1 right-1 bg-black/80 hover:bg-black text-[#00E5FF] border border-[#00E5FF]/40 text-[10px] font-bold px-2 py-0.5 rounded-md opacity-75 group-hover:opacity-100 transition">
+          <label for="logo-upload-input" title="Upload your Selda Diez banner image" class="cursor-pointer absolute bottom-1 right-1 bg-black/85 hover:bg-black text-[#00E5FF] border border-[#00E5FF]/50 text-[10px] font-bold px-2 py-0.5 rounded-md opacity-80 group-hover:opacity-100 transition">
             Change Logo
           </label>
           <input id="logo-upload-input" type="file" accept="image/*" class="hidden" onchange="uploadCustomLogo(event)" />
@@ -135,17 +141,17 @@
 
       <!-- CENTER: Banguis-Diez Farm and Garden Title Block -->
       <div class="flex-1 flex flex-col items-center justify-center text-center px-2">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-2xl bg-[#0D121B]/90 border border-[#00E5FF]/30 shadow-[0_0_20px_rgba(0,229,255,0.12)]">
-          <span class="hidden sm:inline-block w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF]"></span>
+        <div class="inline-flex items-center gap-3 px-5 py-2 rounded-2xl bg-[#0F151E]/95 border border-[#00E5FF]/35 shadow-[0_0_24px_rgba(0,229,255,0.12),inset_0_0_14px_rgba(0,255,136,0.08)]">
+          <span class="hidden sm:inline-block w-2.5 h-2.5 rounded-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF]"></span>
           <div>
-            <h1 class="ice-gradient-text font-black text-lg sm:text-xl md:text-2xl tracking-wide uppercase leading-tight">
+            <h1 class="dual-neon-text font-black text-lg sm:text-xl md:text-2xl tracking-wide uppercase leading-tight">
               Banguis-Diez Farm and Garden
             </h1>
             <p class="text-[10px] sm:text-[11px] font-bold tracking-[0.18em] text-[#94A3B8] uppercase mt-0.5">
               Selda Diez 24 Hours Minimart &bull; Kidapawan City
             </p>
           </div>
-          <span class="hidden sm:inline-block w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF]"></span>
+          <span class="hidden sm:inline-block w-2.5 h-2.5 rounded-full bg-[#00FF88] shadow-[0_0_10px_#00FF88]"></span>
         </div>
       </div>
 
@@ -153,29 +159,29 @@
       <div class="flex flex-wrap items-center justify-center xl:justify-end gap-2 sm:gap-2.5 shrink-0">
         
         <!-- Live Date & 24H Clock -->
-        <div class="bg-[#0D121B] border border-[#00E5FF]/35 rounded-xl px-3 py-1.5 text-center sm:text-right shadow-[0_0_12px_rgba(0,229,255,0.08)]">
-          <div id="live-clock" class="text-[#00E5FF] font-black text-sm sm:text-base tracking-wider drop-shadow-[0_0_6px_rgba(0,229,255,0.4)]">00:00:00 AM</div>
+        <div class="bg-[#0F151E] border border-[#00E5FF]/35 rounded-xl px-3 py-1.5 text-center sm:text-right shadow-[0_0_12px_rgba(0,229,255,0.1)]">
+          <div id="live-clock" class="text-[#00E5FF] font-black text-sm sm:text-base tracking-wider drop-shadow-[0_0_6px_rgba(0,229,255,0.4)]">--:--:-- --</div>
           <div id="live-date" class="text-[#94A3B8] text-[11px] font-medium">Loading date...</div>
         </div>
 
         <!-- Shift Selector -->
-        <div class="flex items-center bg-[#0D121B] border border-[#00E5FF]/35 rounded-xl px-2.5 py-2 gap-2">
-          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-[#00E5FF]/15 text-[#00E5FF] border border-[#00E5FF]/50 animate-pulse">24H</span>
+        <div class="flex items-center bg-[#0F151E] border border-[#00FF88]/35 rounded-xl px-2.5 py-2 gap-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-[#00FF88]/15 text-[#00FF88] border border-[#00FF88]/50 animate-pulse">24H</span>
           <select id="shift-selector" onchange="saveActiveShift()" class="bg-transparent text-[#F0F9FF] text-xs sm:text-sm font-bold focus:outline-none cursor-pointer">
-            <option value="Morning Shift (6AM-2PM)" class="bg-[#090C12] text-[#F0F9FF]">Morning (6AM–2PM)</option>
-            <option value="Afternoon Shift (2PM-10PM)" class="bg-[#090C12] text-[#F0F9FF]">Afternoon (2PM–10PM)</option>
-            <option value="Graveyard Shift (10PM-6AM)" class="bg-[#090C12] text-[#F0F9FF]">Graveyard (10PM–6AM)</option>
+            <option value="Morning (6AM-2PM)" class="bg-[#0A0E14] text-[#F0F9FF]">Morning (6AM–2PM)</option>
+            <option value="Afternoon (2PM-10PM)" class="bg-[#0A0E14] text-[#F0F9FF]">Afternoon (2PM–10PM)</option>
+            <option value="Graveyard (10PM-6AM)" class="bg-[#0A0E14] text-[#F0F9FF]">Graveyard (10PM–6AM)</option>
           </select>
         </div>
 
         <!-- Inventory Manager Button -->
-        <button onclick="openInventoryModal()" class="flex items-center gap-1.5 bg-[#121824] hover:bg-[#192234] text-[#F0F9FF] border border-[#00E5FF]/40 hover:border-[#00E5FF] font-bold text-xs sm:text-sm px-3 py-2.5 rounded-xl transition shadow">
-          <svg class="w-4 h-4 text-[#00E5FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        <button onclick="openInventoryModal()" class="flex items-center gap-1.5 bg-[#0F151E] hover:bg-[#16202E] text-[#F0F9FF] border border-[#00FF88]/45 hover:border-[#00FF88] font-bold text-xs sm:text-sm px-3 py-2.5 rounded-xl transition shadow-[0_0_12px_rgba(0,255,136,0.12)]">
+          <svg class="w-4 h-4 text-[#00FF88]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
           <span>Products &amp; Stock</span>
         </button>
 
         <!-- Shift Report / CSV Export Button -->
-        <button onclick="openReportModal()" class="ice-btn flex items-center gap-1.5 font-extrabold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl transition">
+        <button onclick="openReportModal()" class="btn-neon-ice flex items-center gap-1.5 font-extrabold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl transition">
           <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           <span>Sales &amp; CSV Export</span>
         </button>
@@ -184,13 +190,13 @@
   </header>
 
   <!-- MAIN POS WORKSPACE -->
-  <main class="flex-1 max-w-[1650px] w-full mx-auto p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4">
+  <main class="flex-1 max-w-[1680px] w-full mx-auto p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4">
     
-    <!-- LEFT COLUMN: PRODUCT SEARCH, CATEGORIES & VISUAL GRID (7 cols on lg, 8 on xl) -->
+    <!-- LEFT COLUMN: PRODUCT SEARCH, CATEGORIES & VISUAL GRID -->
     <section class="lg:col-span-7 xl:col-span-8 flex flex-col gap-3">
       
       <!-- Search Bar & Quick Custom Item Toggle -->
-      <div class="ice-panel rounded-2xl p-3 flex flex-col sm:flex-row gap-2.5">
+      <div class="neon-panel rounded-2xl p-3 flex flex-col sm:flex-row gap-2.5">
         <div class="relative flex-1">
           <svg class="w-5 h-5 text-[#00E5FF] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           <input 
@@ -199,37 +205,37 @@
             placeholder="Type product name (e.g. Rice, Egg, Feeds, Piattos) & press Enter..." 
             oninput="renderProducts()"
             onkeydown="handleSearchEnter(event)"
-            class="w-full pl-11 pr-20 py-3 rounded-xl bg-[#05070A] text-[#F0F9FF] placeholder-[#94A3B8]/60 font-semibold text-sm sm:text-base border border-[#00E5FF]/40 focus:outline-none focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/30"
+            class="w-full pl-11 pr-20 py-3 rounded-xl bg-[#05070A] text-[#F0F9FF] placeholder-[#94A3B8]/65 font-semibold text-sm sm:text-base border border-[#00E5FF]/40 focus:outline-none focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/30"
           />
           <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold bg-[#FF3B5C] text-white px-2.5 py-1 rounded-lg">
             Clear
           </button>
         </div>
-        <button onclick="toggleCustomItemDrawer()" class="bg-[#121824] hover:bg-[#00E5FF]/15 text-[#00E5FF] font-extrabold text-xs sm:text-sm px-4 py-3 rounded-xl shadow flex items-center justify-center gap-1.5 whitespace-nowrap border border-[#00E5FF]/50 hover:border-[#00E5FF] transition">
+        <button onclick="toggleCustomItemDrawer()" class="bg-[#0F151E] hover:bg-[#00FF88]/15 text-[#00FF88] font-extrabold text-xs sm:text-sm px-4 py-3 rounded-xl shadow flex items-center justify-center gap-1.5 whitespace-nowrap border border-[#00FF88]/50 hover:border-[#00FF88] transition">
           <span class="text-base leading-none">+</span> Custom / Open Price
         </button>
       </div>
 
       <!-- Collapsible Quick Custom / Repacked Item Entry Form -->
-      <div id="custom-item-drawer" class="hidden bg-[#0D121B] border border-[#00E5FF] rounded-2xl p-3.5 shadow-[0_0_25px_rgba(0,229,255,0.2)]">
+      <div id="custom-item-drawer" class="hidden bg-[#0F151E] border border-[#00FF88] rounded-2xl p-3.5 shadow-[0_0_25px_rgba(0,255,136,0.2)]">
         <div class="flex items-center justify-between mb-2.5">
-          <h3 class="font-black text-[#00E5FF] text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF]"></span>
+          <h3 class="font-black text-[#00FF88] text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#00FF88] shadow-[0_0_8px_#00FF88]"></span>
             Quick Custom / Repacked Item Entry (No Barcode Needed)
           </h3>
           <button onclick="toggleCustomItemDrawer()" class="text-xs font-bold text-[#FF3B5C] hover:underline">Close</button>
         </div>
         <form onsubmit="addCustomItemToCart(event)" class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-          <input id="custom-name" type="text" required placeholder="Item Name (e.g. Repacked Sugar 1/2kg)" class="sm:col-span-5 px-3 py-2.5 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#F0F9FF] placeholder-[#94A3B8]/60 font-semibold text-sm focus:outline-none focus:border-[#00E5FF]" />
-          <input id="custom-price" type="number" step="0.01" min="0.5" required placeholder="Price (₱)" class="sm:col-span-3 px-3 py-2.5 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#00E5FF] placeholder-[#94A3B8]/60 font-bold text-sm focus:outline-none focus:border-[#00E5FF]" />
-          <select id="custom-category" class="sm:col-span-2 px-2.5 py-2.5 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#F0F9FF] font-semibold text-xs focus:outline-none focus:border-[#00E5FF]">
+          <input id="custom-name" type="text" required placeholder="Item Name (e.g. Repacked Sugar 1/2kg)" class="sm:col-span-5 px-3 py-2.5 rounded-xl border border-[#00E5FF]/35 bg-[#05070A] text-[#F0F9FF] placeholder-[#94A3B8]/60 font-semibold text-sm focus:outline-none focus:border-[#00E5FF]" />
+          <input id="custom-price" type="number" step="0.01" min="0.5" required placeholder="Price (₱)" class="sm:col-span-3 px-3 py-2.5 rounded-xl border border-[#00FF88]/40 bg-[#05070A] text-[#00FF88] placeholder-[#94A3B8]/60 font-bold text-sm focus:outline-none focus:border-[#00FF88]" />
+          <select id="custom-category" class="sm:col-span-2 px-2.5 py-2.5 rounded-xl border border-[#00E5FF]/35 bg-[#05070A] text-[#F0F9FF] font-semibold text-xs focus:outline-none focus:border-[#00E5FF]">
             <option value="Groceries & Rice">Groceries</option>
             <option value="Drinks">Drinks</option>
             <option value="Snacks">Snacks</option>
             <option value="School Supplies">School</option>
             <option value="AgriVet & Pet">AgriVet</option>
           </select>
-          <button type="submit" class="sm:col-span-2 ice-btn font-black text-sm py-2.5 px-3 rounded-xl">
+          <button type="submit" class="sm:col-span-2 btn-neon-green font-black text-sm py-2.5 px-3 rounded-xl">
             Add to Cart
           </button>
         </form>
@@ -241,7 +247,7 @@
       </div>
 
       <!-- Product Quick-Tap Grid -->
-      <div class="ice-panel rounded-2xl p-3 flex-1 overflow-y-auto max-h-[calc(100vh-295px)] min-h-[340px]">
+      <div class="neon-panel rounded-2xl p-3 flex-1 overflow-y-auto max-h-[calc(100vh-295px)] min-h-[360px]">
         <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
           <!-- Product Cards rendered here -->
         </div>
@@ -249,15 +255,15 @@
 
     </section>
 
-    <!-- RIGHT COLUMN: CART & CHECKOUT REGISTER (5 cols on lg, 4 on xl) -->
-    <aside class="lg:col-span-5 xl:col-span-4 bg-[#090C12] rounded-2xl border border-[#00E5FF]/45 shadow-[0_0_30px_rgba(0,229,255,0.12)] flex flex-col overflow-hidden">
+    <!-- RIGHT COLUMN: CART & CHECKOUT REGISTER -->
+    <aside class="lg:col-span-5 xl:col-span-4 bg-[#0A0E14] rounded-2xl border border-[#00E5FF]/45 shadow-[0_0_30px_rgba(0,229,255,0.12)] flex flex-col overflow-hidden">
       
       <!-- Cart Header -->
-      <div class="bg-[#0D121B] text-[#F0F9FF] px-4 py-3 flex items-center justify-between border-b border-[#00E5FF]/30">
+      <div class="bg-[#0F151E] text-[#F0F9FF] px-4 py-3 flex items-center justify-between border-b border-[#00E5FF]/30">
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-[#00E5FF]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          <svg class="w-5 h-5 text-[#00FF88]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
           <h2 class="font-black text-base tracking-wide uppercase text-[#F0F9FF]">Current Order</h2>
-          <span id="cart-count-badge" class="bg-[#00E5FF] text-black font-black text-xs px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,229,255,0.5)]">0</span>
+          <span id="cart-count-badge" class="bg-[#00FF88] text-black font-black text-xs px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,255,136,0.5)]">0</span>
         </div>
         <button onclick="clearCart()" class="text-xs font-bold text-[#FF3B5C] hover:text-white bg-[#FF3B5C]/15 hover:bg-[#FF3B5C] border border-[#FF3B5C]/40 px-2.5 py-1 rounded-lg transition">
           Clear Cart
@@ -266,16 +272,15 @@
 
       <!-- Cart Items List -->
       <div id="cart-items-container" class="flex-1 overflow-y-auto p-3 space-y-2 min-h-[200px] max-h-[340px] bg-[#05070A]">
-        <!-- Empty Cart State -->
         <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-center py-10 px-4 text-[#94A3B8]">
           <svg class="w-12 h-12 mb-2 text-[#00E5FF]/30" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
           <p class="font-bold text-sm text-[#F0F9FF]">No items in cart yet</p>
-          <p class="text-xs mt-1">Tap any product on the left or type in the search bar and press <span class="font-bold text-[#00E5FF]">Enter</span>.</p>
+          <p class="text-xs mt-1">Tap any product on the left or type in the search bar and press <span class="font-bold text-[#00FF88]">Enter</span>.</p>
         </div>
       </div>
 
       <!-- Totals, Discount & Payment Section -->
-      <div class="bg-[#0D121B] border-t border-[#00E5FF]/25 p-3.5 space-y-3">
+      <div class="bg-[#0F151E] border-t border-[#00E5FF]/25 p-3.5 space-y-3">
         
         <!-- Subtotal & Discount Row -->
         <div class="space-y-1.5 text-sm">
@@ -303,7 +308,7 @@
 
         <!-- Payment Method Toggle -->
         <div class="grid grid-cols-2 gap-2">
-          <button id="pay-method-cash" onclick="setPaymentMethod('Cash')" class="py-2 px-3 rounded-xl font-black text-xs uppercase tracking-wider border border-[#00E5FF] bg-[#00E5FF]/20 text-[#00E5FF] shadow-[0_0_12px_rgba(0,229,255,0.25)] transition">
+          <button id="pay-method-cash" onclick="setPaymentMethod('Cash')" class="py-2 px-3 rounded-xl font-black text-xs uppercase tracking-wider border border-[#00FF88] bg-[#00FF88]/20 text-[#00FF88] shadow-[0_0_12px_rgba(0,255,136,0.25)] transition">
             💵 Cash
           </button>
           <button id="pay-method-gcash" onclick="setPaymentMethod('GCash')" class="py-2 px-3 rounded-xl font-black text-xs uppercase tracking-wider border border-[#00E5FF]/25 bg-[#05070A] text-[#94A3B8] hover:text-[#F0F9FF] hover:border-[#00E5FF]/50 transition">
@@ -322,20 +327,20 @@
               min="0" 
               placeholder="0.00" 
               oninput="updateCheckoutTotals()"
-              class="w-32 text-right px-2.5 py-1.5 rounded-lg border border-[#00E5FF]/50 bg-[#0D121B] font-black text-lg text-[#00E5FF] focus:outline-none focus:border-[#00E5FF]"
+              class="w-32 text-right px-2.5 py-1.5 rounded-lg border border-[#00E5FF]/50 bg-[#0F151E] font-black text-lg text-[#00E5FF] focus:outline-none focus:border-[#00E5FF]"
             />
           </div>
           <!-- Quick Bill Buttons -->
           <div class="grid grid-cols-5 gap-1">
-            <button type="button" onclick="setExactCash()" class="bg-[#121824] hover:bg-[#00E5FF]/20 text-[#00E5FF] border border-[#00E5FF]/30 font-extrabold text-[11px] py-1.5 rounded-lg transition">Exact</button>
-            <button type="button" onclick="addCashBill(50)" class="bg-[#121824] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱50</button>
-            <button type="button" onclick="addCashBill(100)" class="bg-[#121824] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱100</button>
-            <button type="button" onclick="addCashBill(500)" class="bg-[#121824] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱500</button>
-            <button type="button" onclick="addCashBill(1000)" class="bg-[#121824] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱1000</button>
+            <button type="button" onclick="setExactCash()" class="bg-[#0F151E] hover:bg-[#00FF88]/20 text-[#00FF88] border border-[#00FF88]/35 font-extrabold text-[11px] py-1.5 rounded-lg transition">Exact</button>
+            <button type="button" onclick="addCashBill(50)" class="bg-[#0F151E] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱50</button>
+            <button type="button" onclick="addCashBill(100)" class="bg-[#0F151E] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱100</button>
+            <button type="button" onclick="addCashBill(500)" class="bg-[#0F151E] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱500</button>
+            <button type="button" onclick="addCashBill(1000)" class="bg-[#0F151E] hover:bg-[#00E5FF]/20 text-[#F0F9FF] border border-white/10 font-extrabold text-[11px] py-1.5 rounded-lg transition">+₱1000</button>
           </div>
           <div class="flex justify-between items-center pt-1.5 border-t border-dashed border-[#00E5FF]/20">
             <span class="text-xs font-extrabold text-[#94A3B8] uppercase">Change Due:</span>
-            <span id="summary-change" class="font-black text-lg text-[#38BDF8]">₱0.00</span>
+            <span id="summary-change" class="font-black text-lg text-[#00FF88]">₱0.00</span>
           </div>
         </div>
 
@@ -343,7 +348,7 @@
         <button 
           id="complete-sale-btn"
           onclick="completeSale()" 
-          class="w-full ice-btn py-3.5 px-4 rounded-xl font-black text-base uppercase tracking-wider active:scale-[0.99] transition flex items-center justify-center gap-2"
+          class="w-full btn-neon-green py-3.5 px-4 rounded-xl font-black text-base uppercase tracking-wider active:scale-[0.99] transition flex items-center justify-center gap-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           <span>Record Sale &amp; Receipt</span>
@@ -354,31 +359,24 @@
   </main>
 
   <!-- MODAL 1: THERMAL RECEIPT PREVIEW & PRINT -->
-  <div id="receipt-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-[#0D121B] rounded-2xl max-w-sm w-full overflow-hidden shadow-[0_0_35px_rgba(0,229,255,0.25)] border border-[#00E5FF]">
-      <div class="bg-[#05070A] text-[#F0F9FF] px-4 py-3 flex items-center justify-between border-b border-[#00E5FF]/30 no-print">
-        <span class="font-black text-sm uppercase tracking-wider text-[#00E5FF]">Transaction Recorded!</span>
-        <button onclick="closeReceiptModal()" class="text-[#94A3B8] hover:text-[#00E5FF] font-bold text-xl leading-none">&times;</button>
+  <div id="receipt-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#0F151E] rounded-2xl max-w-sm w-full overflow-hidden shadow-[0_0_35px_rgba(0,255,136,0.25)] border border-[#00FF88]">
+      <div class="bg-[#05070A] text-[#F0F9FF] px-4 py-3 flex items-center justify-between border-b border-[#00FF88]/30 no-print">
+        <span class="font-black text-sm uppercase tracking-wider text-[#00FF88]">Transaction Recorded!</span>
+        <button onclick="closeReceiptModal()" class="text-[#94A3B8] hover:text-[#00FF88] font-bold text-xl leading-none">&times;</button>
       </div>
 
-      <!-- Printable Thermal Receipt Area (Clean White Paper Simulation for Print Accuracy) -->
-      <div class="p-3 bg-[#090C12]">
+      <!-- Printable Thermal Receipt Area -->
+      <div class="p-3 bg-[#0A0E14]">
         <div id="printable-receipt" class="p-5 bg-white text-black font-mono text-xs leading-relaxed rounded-lg shadow-inner">
           <div class="text-center border-b border-dashed border-black pb-2 mb-2">
-            <div class="font-black text-sm uppercase">SELDA DIEZ 24 HOURS MINIMART</div>
-            <div class="text-[11px] font-bold">Banguis-Diez Farm &amp; Garden</div>
-            <div class="text-[10px]">Purok Maligaya, Brgy. Perez</div>
+            <div class="font-black text-sm uppercase">BANGUIS-DIEZ FARM &amp; GARDEN</div>
+            <div class="text-[11px] font-bold">Selda Diez 24 Hours Minimart</div>
             <div class="text-[10px]">Kidapawan City, North Cotabato</div>
           </div>
-          <div id="receipt-meta" class="text-[10px] border-b border-dashed border-black pb-2 mb-2 space-y-0.5">
-            <!-- Meta populated by JS -->
-          </div>
-          <div id="receipt-items" class="border-b border-dashed border-black pb-2 mb-2 space-y-1">
-            <!-- Items populated by JS -->
-          </div>
-          <div id="receipt-totals" class="space-y-0.5 text-[11px]">
-            <!-- Totals populated by JS -->
-          </div>
+          <div id="receipt-meta" class="text-[10px] border-b border-dashed border-black pb-2 mb-2 space-y-0.5"></div>
+          <div id="receipt-items" class="border-b border-dashed border-black pb-2 mb-2 space-y-1"></div>
+          <div id="receipt-totals" class="space-y-0.5 text-[11px]"></div>
           <div class="text-center border-t border-dashed border-black pt-2 mt-3 text-[10px]">
             <div class="font-bold">Salamat sa pagpalit!</div>
             <div>Open 24 Hours &bull; Groceries &amp; AgriVet</div>
@@ -387,150 +385,18 @@
       </div>
 
       <div class="p-3 bg-[#05070A] border-t border-[#00E5FF]/25 flex gap-2 no-print">
-        <button onclick="window.print()" class="flex-1 bg-[#121824] hover:bg-[#192234] text-[#00E5FF] border border-[#00E5FF]/50 font-black text-xs py-2.5 px-3 rounded-xl shadow flex items-center justify-center gap-1.5 transition">
+        <button onclick="window.print()" class="flex-1 bg-[#0F151E] hover:bg-[#16202E] text-[#00E5FF] border border-[#00E5FF]/50 font-black text-xs py-2.5 px-3 rounded-xl shadow flex items-center justify-center gap-1.5 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
           Print Receipt
         </button>
-        <button onclick="closeReceiptModal()" class="flex-1 ice-btn font-black text-xs py-2.5 px-3 rounded-xl">
-          Next Customer
+        <button onclick="closeReceiptModal()" class="flex-1 btn-neon-green font-black text-xs py-2.5 px-3 rounded-xl">
+          New Order
         </button>
       </div>
     </div>
   </div>
 
   <!-- MODAL 2: PRODUCTS & STOCK MANAGER -->
-  <div id="inventory-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
-    <div class="bg-[#090C12] rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.2)]">
-      <div class="bg-[#05070A] text-[#F0F9FF] px-5 py-3.5 flex items-center justify-between border-b border-[#00E5FF]/30">
-        <div>
-          <h2 class="font-black text-base sm:text-lg text-[#00E5FF] uppercase tracking-wide">Product Catalog &amp; Stock Manager</h2>
-          <p class="text-xs text-[#94A3B8]">Add new items, update prices (₱), or adjust stock levels. Saved automatically in your browser.</p>
-        </div>
-        <button onclick="closeInventoryModal()" class="text-[#94A3B8] hover:text-[#00E5FF] text-2xl font-bold leading-none">&times;</button>
-      </div>
-
-      <!-- Add New Product Form -->
-      <form onsubmit="addNewProduct(event)" class="p-4 bg-[#0D121B] border-b border-[#00E5FF]/20 grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-        <input id="new-prod-name" type="text" required placeholder="Product Name (e.g. Ganador Rice 1kg)" class="sm:col-span-4 px-3 py-2 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#F0F9FF] placeholder-[#94A3B8]/60 text-sm font-semibold focus:outline-none focus:border-[#00E5FF]" />
-        <select id="new-prod-cat" class="sm:col-span-3 px-3 py-2 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#F0F9FF] text-sm font-semibold focus:outline-none focus:border-[#00E5FF]">
-          <option value="Groceries & Rice">Groceries &amp; Rice</option>
-          <option value="Drinks">Drinks</option>
-          <option value="Snacks">Snacks</option>
-          <option value="School Supplies">School Supplies</option>
-          <option value="AgriVet & Pet">AgriVet &amp; Pet</option>
-        </select>
-        <input id="new-prod-price" type="number" step="0.01" min="0.5" required placeholder="Price (₱)" class="sm:col-span-2 px-3 py-2 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#00E5FF] placeholder-[#94A3B8]/60 text-sm font-bold focus:outline-none focus:border-[#00E5FF]" />
-        <input id="new-prod-stock" type="number" min="0" required placeholder="Stock Qty" class="sm:col-span-1 px-2.5 py-2 rounded-xl border border-[#00E5FF]/30 bg-[#05070A] text-[#F0F9FF] placeholder-[#94A3B8]/60 text-sm font-bold focus:outline-none focus:border-[#00E5FF]" />
-        <button type="submit" class="sm:col-span-2 ice-btn font-black text-xs uppercase py-2 px-3 rounded-xl">
-          + Add Item
-        </button>
-      </form>
-
-      <!-- Editable Product List -->
-      <div class="flex-1 overflow-y-auto p-4 bg-[#05070A]">
-        <div class="overflow-x-auto rounded-xl border border-[#00E5FF]/20">
-          <table class="w-full text-left border-collapse text-sm">
-            <thead>
-              <tr class="bg-[#0D121B] text-[#00E5FF] text-xs uppercase border-b border-[#00E5FF]/25">
-                <th class="p-2.5">Product Name</th>
-                <th class="p-2.5">Category</th>
-                <th class="p-2.5">Price (₱)</th>
-                <th class="p-2.5">Stock</th>
-                <th class="p-2.5 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody id="inventory-table-body" class="divide-y divide-white/10 bg-[#090C12] text-[#F0F9FF]">
-              <!-- Populated by JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="p-3 bg-[#0D121B] border-t border-[#00E5FF]/20 flex flex-wrap justify-between items-center gap-2">
-        <button onclick="resetDefaultCatalog()" class="text-xs font-bold text-[#FF3B5C] hover:underline px-2 py-1">
-          Reset to Starter Catalog
-        </button>
-        <button onclick="closeInventoryModal()" class="ice-btn font-black text-xs uppercase px-5 py-2.5 rounded-xl">
-          Done &amp; Save
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL 3: SALES LOG & SHIFT Z-READING CSV EXPORT -->
-  <div id="report-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
-    <div class="bg-[#090C12] rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.2)]">
-      <div class="bg-[#05070A] text-[#F0F9FF] px-5 py-3.5 flex items-center justify-between border-b border-[#00E5FF]/30">
-        <div>
-          <h2 class="font-black text-base sm:text-lg text-[#00E5FF] uppercase tracking-wide">Shift Sales Log &amp; Z-Reading Export</h2>
-          <p class="text-xs text-[#94A3B8]">Export your recorded sales to Excel (.CSV) at the end of every shift.</p>
-        </div>
-        <button onclick="closeReportModal()" class="text-[#94A3B8] hover:text-[#00E5FF] text-2xl font-bold leading-none">&times;</button>
-      </div>
-
-      <!-- KPI Summary Cards -->
-      <div class="p-4 grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#0D121B] border-b border-[#00E5FF]/20">
-        <div class="bg-[#05070A] p-3 rounded-xl border border-[#00E5FF]/35 shadow-sm">
-          <div class="text-[11px] font-bold text-[#94A3B8] uppercase">Total Sales</div>
-          <div id="kpi-total-sales" class="text-xl font-black text-[#00E5FF] mt-0.5">₱0.00</div>
-        </div>
-        <div class="bg-[#05070A] p-3 rounded-xl border border-[#00E5FF]/25 shadow-sm">
-          <div class="text-[11px] font-bold text-[#94A3B8] uppercase">Cash Sales</div>
-          <div id="kpi-cash-sales" class="text-xl font-black text-[#F0F9FF] mt-0.5">₱0.00</div>
-        </div>
-        <div class="bg-[#05070A] p-3 rounded-xl border border-[#00E5FF]/25 shadow-sm">
-          <div class="text-[11px] font-bold text-[#94A3B8] uppercase">GCash Sales</div>
-          <div id="kpi-gcash-sales" class="text-xl font-black text-[#38BDF8] mt-0.5">₱0.00</div>
-        </div>
-        <div class="bg-[#05070A] p-3 rounded-xl border border-[#00E5FF]/25 shadow-sm">
-          <div class="text-[11px] font-bold text-[#94A3B8] uppercase">Transactions</div>
-          <div id="kpi-tx-count" class="text-xl font-black text-[#7DD3FC] mt-0.5">0</div>
-        </div>
-      </div>
-
-      <!-- Transaction History Table -->
-      <div class="flex-1 overflow-y-auto p-4 bg-[#05070A]">
-        <div class="overflow-x-auto rounded-xl border border-[#00E5FF]/20">
-          <table class="w-full text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="bg-[#0D121B] text-[#00E5FF] text-xs uppercase border-b border-[#00E5FF]/25">
-                <th class="p-2.5">TX ID</th>
-                <th class="p-2.5">Date &amp; Time</th>
-                <th class="p-2.5">Shift</th>
-                <th class="p-2.5">Payment</th>
-                <th class="p-2.5">Items Sold</th>
-                <th class="p-2.5 text-right">Total (₱)</th>
-              </tr>
-            </thead>
-            <tbody id="sales-log-body" class="divide-y divide-white/10 bg-[#090C12] text-[#F0F9FF]">
-              <!-- Populated by JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Footer Export & Clear Actions -->
-      <div class="p-3.5 bg-[#0D121B] border-t border-[#00E5FF]/20 flex flex-wrap items-center justify-between gap-2">
-        <button onclick="confirmClearSalesLog()" class="text-xs font-bold text-[#FF3B5C] hover:bg-[#FF3B5C]/15 px-3 py-2 rounded-xl transition">
-          Clear Archived Sales (After CSV Export)
-        </button>
-        <div class="flex gap-2">
-          <button onclick="exportSalesToCSV()" class="ice-btn font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            Download Excel CSV
-          </button>
-          <button onclick="closeReportModal()" class="bg-[#121824] hover:bg-[#192234] text-[#F0F9FF] border border-white/15 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition">
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CUSTOM CONFIRMATION DIALOG (Replaces browser confirm()) -->
-  <div id="confirm-dialog" class="hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-[#0D121B] border border-[#FF3B5C] rounded-2xl max-w-sm w-full p-5 shadow-[0_0_30px_rgba(255,59,92,0.3)]">
-      <h3 id="confirm-title" class="font-black text-base text-[#FF3B5C] uppercase mb-1">Confirm Action</h3>
-      <p id="confirm-message" class="text-sm text-[#F0F9FF] font-medium mb-4">Are you sure?</p>
-      <div class="flex justify-end gap-2">
-        <button onclick="closeConfirmDialog()" class="px-4 py-2 rounded-
+  <div id="inventory-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-[#0A0E14] rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-[#00FF88] shadow-[0_0_40px_rgba(0,255,136,0.2)]">
+      <div class="bg-[#05070A] text-[#F0F9FF] px-5 py-3.5 flex items-center justify-between border-b border-[#00FF88]/30
